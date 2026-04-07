@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Base64ツール</title>
+
+<style>
+body{
+    background:#020617;
+    color:#22c55e;
+    font-family:monospace;
+    text-align:center;
+    padding:20px;
+}
+textarea{
+    width:90%;
+    height:120px;
+    margin:10px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+}
+button{
+    padding:10px 20px;
+    margin:5px;
+    border:none;
+    border-radius:8px;
+    background:#22c55e;
+    color:black;
+    cursor:pointer;
+}
+.output{
+    background:#0f172a;
+    padding:10px;
+    border-radius:8px;
+    word-break:break-all;
+    margin-top:10px;
+}
+</style>
+
+</head>
+<body>
+
+<h1>📦 Base64ツール</h1>
+
+<h2>入力</h2>
+<textarea id="input" placeholder="文字またはBase64コードを入力..."></textarea>
+
+<br>
+<button onclick="encode()">🔒 Base64化</button>
+<button onclick="decode()">🔓 復号</button>
+
+<h2>結果</h2>
+<div class="output" id="output"></div>
+
+<script>
+function encode(){
+    try{
+        const text = document.getElementById("input").value;
+        const encoded = btoa(unescape(encodeURIComponent(text)));
+        document.getElementById("output").innerText = encoded;
+    }catch(e){
+        document.getElementById("output").innerText = "エンコード失敗";
+    }
+}
+
+function decode(){
+    try{
+        const text = document.getElementById("input").value;
+        const decoded = decodeURIComponent(escape(atob(text)));
+        document.getElementById("output").innerText = decoded;
+    }catch(e){
+        document.getElementById("output").innerText = "デコード失敗（形式が違う可能性）";
+    }
+}
+</script>
+
+</body>
+</html>
